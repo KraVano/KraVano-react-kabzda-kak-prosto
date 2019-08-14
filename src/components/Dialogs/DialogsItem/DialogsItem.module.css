@@ -1,0 +1,7 @@
+.dialogs__item {
+
+}
+
+.dialogs__item a.active {
+    color: red;
+}

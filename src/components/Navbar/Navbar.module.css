@@ -1,0 +1,42 @@
+.nav {
+    grid-area: nav;
+    background: lightgrey;
+}
+
+.nav ul {
+    list-style-type: none;
+    font-weight: 500;
+}
+
+.nav .item a {
+    text-decoration: none;
+    color: white;
+    transition: color 0.3s ease;
+}
+
+.nav .item a:hover {
+    color: black;
+}
+
+.nav .item a.active {
+    color: red;
+}
+
+.friends{
+    padding: 10px;
+}
+
+.friends__item{
+    display: inline-block;
+    padding: 3px;
+}
+
+.friends__item h6{
+    margin: 5px 0;
+}
+
+.friends__item img{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
