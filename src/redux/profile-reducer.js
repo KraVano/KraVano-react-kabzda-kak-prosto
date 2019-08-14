@@ -21,13 +21,16 @@ const profileReducer = (state = initialState, action) => {
 
     switch (action.type) {
         case ADD_POST:
+            let stateCopy = {...state};
             let newPost = {
                 id: state.postsData.length + 1,
                 message: action.message,
                 img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRKEA0J2ZMYtV8ChwbzW2ur9ZLeMKIZWi0BWWLiM-TUqDlaQzEMVw',
                 likeCount: Math.floor(Math.random() * 100)
             };
-            state.postsData.push(newPost);
+            stateCopy.postsData = [...state.postsData];
+            stateCopy.postsData.push(newPost);
+            return stateCopy;
             break;
         default:
             console.log('Sorry, this method does not exist.');
