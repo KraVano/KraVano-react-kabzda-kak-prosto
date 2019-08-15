@@ -16,7 +16,7 @@ export default function Dialogs(props) {
     return (
         <div className={classes.dialogs}>
             <div className={classes.dialogs__list}>
-                {props.dialogsPage.dialogsData.map((item) => <div className={`${classes.dialogs__item}`}><DialogItem key={item.id} id={item.id} name={item.name}/></div>)}
+                {props.dialogsPage.dialogsData.map((item) => <DialogItem key={item.id} id={item.id} name={item.name}/>)}
             </div>
             <div className={classes.messages}>
                 {props.dialogsPage.messagesData.map((item)=> <MessageItem key={item.id} message={item.message}/> )}

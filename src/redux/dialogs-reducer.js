@@ -17,7 +17,6 @@ let initialState = {
 };
 
 const dialogsReducer = (state = initialState, action) => {
-    let stateCopy = {...state};
     switch (action.type) {
         case SEND_MESSAGE:
             if (!action.hasOwnProperty("message")) return state;
@@ -25,13 +24,13 @@ const dialogsReducer = (state = initialState, action) => {
                 id: state.messagesData.length + 1,
                 message: action.message
             };
-            stateCopy.messagesData = [...state.messagesData, newMessage];
-            break;
+            // stateCopy.messagesData = [...state.messagesData, newMessage];
+            return {...state, messagesData: [...state.messagesData, newMessage]};
         default:
             console.log('Sorry, this method does not exist.');
     }
 
-    return stateCopy;
+    return state;
 };
 
 export const sendMessageActionCreator = (message) => ({type: SEND_MESSAGE, message: message});

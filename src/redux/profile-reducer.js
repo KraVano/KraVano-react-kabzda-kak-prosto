@@ -18,7 +18,6 @@ let initialState = {
 };
 
 const profileReducer = (state = initialState, action) => {
-    let stateCopy = {...state};
     switch (action.type) {
         case ADD_POST:
             let newPost = {
@@ -27,13 +26,13 @@ const profileReducer = (state = initialState, action) => {
                 img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRKEA0J2ZMYtV8ChwbzW2ur9ZLeMKIZWi0BWWLiM-TUqDlaQzEMVw',
                 likeCount: Math.floor(Math.random() * 100)
             };
-            stateCopy.postsData = [...state.postsData, newPost];
-            break;
+            // stateCopy.postsData = [...state.postsData, newPost];
+            return {...state, postsData: [...state.postsData, newPost]};
         default:
             console.log('Sorry, this method does not exist.');
     }
 
-    return stateCopy;
+    return state;
 };
 
 export const addPostActionCreator = (message) => ({type: ADD_POST, message: message});
