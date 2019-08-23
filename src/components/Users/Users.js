@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styles from './users.module.css';
 import * as axios from 'axios';
 import defUserPhoto from '../../../src/assets/images/user.svg'
@@ -39,8 +39,12 @@ let Users = (props) => {
         }
     }
 
+    useEffect(() => {
+        getUsers();
+    });
+
     return (<div>
-        <button onClick={getUsers}>Get Users</button>
+        {/*<button onClick={getUsers}>Get Users</button>*/}
         {props.users.map(u =>
             <div key={u.id}>
             <span>
