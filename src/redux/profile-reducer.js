@@ -1,4 +1,5 @@
 const ADD_POST = 'ADD-POST';
+const SET_USER_PROFILE = 'SET_USER_PROFILE';
 
 let initialState = {
     postsData: [
@@ -15,6 +16,7 @@ let initialState = {
             likeCount: 10
         }
     ],
+    profile: null
 };
 
 const profileReducer = (state = initialState, action) => {
@@ -28,6 +30,8 @@ const profileReducer = (state = initialState, action) => {
             };
             // stateCopy.postsData = [...state.postsData, newPost];
             return {...state, postsData: [...state.postsData, newPost]};
+        case SET_USER_PROFILE:
+            return {...state, profile: action.profile};
         default:
             console.log('Sorry, this method does not exist.');
     }
@@ -36,5 +40,6 @@ const profileReducer = (state = initialState, action) => {
 };
 
 export const addPostActionCreator = (message) => ({type: ADD_POST, message: message});
+export const setUserProfile = (profile) => ({type: SET_USER_PROFILE, profile: profile});
 
 export default profileReducer;
