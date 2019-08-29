@@ -1,11 +1,10 @@
 import React, {Fragment} from "react";
 import classes from "./ProfileInfo.module.css";
 import Preloader from "../../common/Preloader/Preloader";
+import defUserPhoto from "../../../assets/images/user.svg";
 
 export default function ProfileInfo(props) {
-    if (!props.profile) {
-        return <Preloader/>;
-    }
+    if (!props.profile) return <Preloader/>;
 
     return (
         <Fragment>
@@ -16,8 +15,10 @@ export default function ProfileInfo(props) {
             </div>
             <div className={classes.avatar}>
                 <img
-                    src={props.profile.photos.large}
-                    alt="image"/>
+                    src={props.profile.photos.large || defUserPhoto}
+                    alt="image"
+                    style={{maxWidth: '300px'}}
+                />
                 <h2>{props.profile.fullName}</h2>
                 <h3>{props.profile.aboutMe}</h3>
                 {/*{props.profile.contacts.map((c) => <h6>{c}</h6>)}*/}

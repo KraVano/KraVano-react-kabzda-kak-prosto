@@ -2,3 +2,16 @@
     grid-area: header;
     background: lightgrey;
 }
+
+.loginBlock {
+    float: right;
+    margin: 15px;
+}
+
+.loginBlock a{
+    color: #fff;
+}
+
+.loginBlock a:hover{
+    color: #000;
+}
