@@ -5,13 +5,24 @@
 
 .loginBlock {
     float: right;
-    margin: 15px;
+    text-align: center;
+    margin: 5px 15px;
 }
 
-.loginBlock a{
+.loginBlock a {
     color: #fff;
 }
 
-.loginBlock a:hover{
+.loginBlock a:hover {
     color: #000;
+}
+
+.loginBlock img {
+    max-width: 30px;
+    display: inline-block;
+}
+
+.loginBlock h5 {
+    margin: 0;
+    display: inline-block;
 }

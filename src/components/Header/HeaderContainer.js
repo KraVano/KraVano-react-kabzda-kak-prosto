@@ -8,7 +8,6 @@ let HeaderContainer = (props) => {
 
     useEffect(() => {
         axios.get(`https://social-network.samuraijs.com/api/1.0/auth/me`, {withCredentials: true}).then(response => {
-            //debugger;
             if (response.data.resultCode === 0) {
                 let {id, email, login} = response.data.data;
                 axios.get(`https://social-network.samuraijs.com/api/1.0/profile/1526`).then(res => {
