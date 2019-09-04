@@ -13,7 +13,6 @@ const authReducer = (state = initialState, action) => {
         case SET_USER_DATA:
             return {...state, ...action.user, isAuth: true}
         default:
-            console.log('Sorry, this method does not exist.');
             return state;
     }
 };

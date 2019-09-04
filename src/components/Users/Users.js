@@ -3,6 +3,7 @@ import styles from "./users.module.css";
 import defUserPhoto from "../../assets/images/user.svg";
 import {NavLink} from "react-router-dom";
 import * as axios from "axios";
+import {usersAPI} from "../../api/api";
 
 let Users = (props) => {
 
@@ -30,14 +31,23 @@ let Users = (props) => {
                     </NavLink>
                 </div>
                 <div>
-                    {u.followed ? <button onClick={() => {
-                            props.unfollow(u.id)
-                        }}>Unfollow</button> :
-                        <button onClick={() => {
-                            axios.post(`https://social-network.samuraijs.com/api/1.0/follow/2`).then(res => {
-
+                    {u.followed ? <button disabled={props.followingInProgress} onClick={() => {
+                            props.toggleFollowingProgress(true);
+                            usersAPI.unFollow(u.id).then(data => {
+                                if (data.resultCode == 0) {
+                                    props.unfollow(u.id);
+                                }
+                                props.toggleFollowingProgress(false);
                             });
-                            props.follow(u.id)
+                        }}>Unfollow</button> :
+                        <button disabled={props.followingInProgress} onClick={() => {
+                            props.toggleFollowingProgress(true);
+                            usersAPI.follow(u.id).then(data => {
+                                if (data.resultCode == 0) {
+                                    props.follow(u.id);
+                                }
+                                props.toggleFollowingProgress(false);
+                            });
                         }
                         }>Follow</button>}
                 </div>
