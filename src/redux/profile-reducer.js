@@ -33,10 +33,8 @@ const profileReducer = (state = initialState, action) => {
         case SET_USER_PROFILE:
             return {...state, profile: action.profile};
         default:
-            console.log('Sorry, this method does not exist.');
+            return state;
     }
-
-    return state;
 };
 
 export const addPostActionCreator = (message) => ({type: ADD_POST, message: message});

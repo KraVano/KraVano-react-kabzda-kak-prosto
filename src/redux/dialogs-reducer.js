@@ -27,10 +27,8 @@ const dialogsReducer = (state = initialState, action) => {
             // stateCopy.messagesData = [...state.messagesData, newMessage];
             return {...state, messagesData: [...state.messagesData, newMessage]};
         default:
-            console.log('Sorry, this method does not exist.');
+            return state;
     }
-
-    return state;
 };
 
 export const sendMessageActionCreator = (message) => ({type: SEND_MESSAGE, message: message});
