@@ -1,3 +1,5 @@
+import {usersAPI} from "../api/api";
+
 const FOLLOW = 'FOLLOW';
 const UNFOLLOW = 'UNFOLLOW';
 const SET_USERS = 'SET_USERS';
@@ -78,16 +80,74 @@ const usersReducer = (state = initialState, action) => {
     }
 };
 
-export const follow = (userId) => ({type: FOLLOW, userId: userId});
-export const unfollow = (userId) => ({type: UNFOLLOW, userId: userId});
+export const followSuccess = (userId) => ({type: FOLLOW, userId: userId});
+export const unfollowSuccess = (userId) => ({type: UNFOLLOW, userId: userId});
 export const setUsers = (users) => ({type: SET_USERS, users: users});
 export const setCurrentPage = (currentPage) => ({type: SET_CURRENT_PAGE, currentPage: currentPage});
 export const setTotalUsersCount = (totalUserCount) => ({type: SET_TOTAL_USER_COUNT, totalUserCount: totalUserCount});
-export const setIsFetching = (isFetching) => ({type: TOGGLE_IS_FETCHING, isFetching: isFetching});
+export const toggleIsFetching = (isFetching) => ({type: TOGGLE_IS_FETCHING, isFetching: isFetching});
 export const toggleFollowingProgress = (isFetching, userId) => ({
     type: TOGGLE_IS_FOLLOWING_PROGRESS,
     isFetching: isFetching,
     userId: userId
 });
+
+export const getUsers = (currentPage, pageSize) => (dispatch) => {
+    dispatch(toggleIsFetching(true));
+
+    usersAPI.getUsers(currentPage, pageSize).then(data => {
+        dispatch(toggleIsFetching(false));
+        dispatch(setUsers(data.items));
+        dispatch(setTotalUsersCount(data.totalCount));
+    });
+
+    // props.setUsers([
+    //     {
+    //         id: 1,
+    //         fullName: 'Dmitry',
+    //         avatar: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRKEA0J2ZMYtV8ChwbzW2ur9ZLeMKIZWi0BWWLiM-TUqDlaQzEMVw',
+    //         status: "I am a boss",
+    //         location: {city: "Minsk", country: "Belarus"},
+    //         followed: true
+    //     },
+    //     {
+    //         id: 2,
+    //         fullName: 'Sasha',
+    //         avatar: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRKEA0J2ZMYtV8ChwbzW2ur9ZLeMKIZWi0BWWLiM-TUqDlaQzEMVw',
+    //         status: "I am a bosss",
+    //         location: {city: "Moscow", country: "Russia"},
+    //         followed: false
+    //     },
+    //     {
+    //         id: 3,
+    //         fullName: 'Andrew',
+    //         avatar: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRKEA0J2ZMYtV8ChwbzW2ur9ZLeMKIZWi0BWWLiM-TUqDlaQzEMVw',
+    //         status: "I am a bossss",
+    //         location: {city: "Kiev", country: "Ukraine"},
+    //         followed: true
+    //     }
+    // ]);
+}
+
+export const follow = (userId) => (dispatch) => {
+    dispatch(toggleFollowingProgress(true, userId));
+    usersAPI.follow(userId).then(data => {
+        if (data.resultCode === 0) {
+            dispatch(followSuccess(userId));
+        }
+        dispatch(toggleFollowingProgress(false, userId));
+    });
+}
+
+export const unFollow = (userId) => (dispatch) => {
+    dispatch(toggleFollowingProgress(true, userId));
+    usersAPI.unFollow(userId).then(data => {
+        if (data.resultCode === 0) {
+            dispatch(unfollowSuccess(userId));
+        }
+        dispatch(toggleFollowingProgress(false, userId));
+    });
+}
+
 
 export default usersReducer;

@@ -2,8 +2,6 @@ import React from 'react';
 import styles from "./users.module.css";
 import defUserPhoto from "../../assets/images/user.svg";
 import {NavLink} from "react-router-dom";
-import * as axios from "axios";
-import {usersAPI} from "../../api/api";
 
 let Users = (props) => {
 
@@ -31,25 +29,14 @@ let Users = (props) => {
                     </NavLink>
                 </div>
                 <div>
-                    {u.followed ? <button disabled={props.followingInProgress.some(id => id === u.id)} onClick={() => {
-                            props.toggleFollowingProgress(true, u.id);
-                            usersAPI.unFollow(u.id).then(data => {
-                                if (data.resultCode === 0) {
-                                    props.unfollow(u.id);
-                                }
-                                props.toggleFollowingProgress(false, u.id);
-                            });
-                        }}>Unfollow</button> :
-                        <button disabled={props.followingInProgress.some(id => id === u.id)} onClick={() => {
-                            props.toggleFollowingProgress(true, u.id);
-                            usersAPI.follow(u.id).then(data => {
-                                if (data.resultCode === 0) {
-                                    props.follow(u.id);
-                                }
-                                props.toggleFollowingProgress(false, u.id);
-                            });
-                        }
-                        }>Follow</button>}
+                    {
+                        u.followed ?
+                            <button disabled={props.followingInProgress.some(id => id === u.id)}
+                                    onClick={() => props.unFollow(u.id)}>Unfollow</button>
+                            :
+                            <button disabled={props.followingInProgress.some(id => id === u.id)}
+                                    onClick={() => props.follow(u.id)}>Follow</button>
+                    }
                 </div>
             </span>
                 <span>
