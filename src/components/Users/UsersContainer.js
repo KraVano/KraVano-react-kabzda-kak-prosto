@@ -8,6 +8,8 @@ import {
 } from '../../redux/users-reducer';
 import Users from './Users';
 import Preloader from "../common/Preloader/Preloader";
+import {withAuthRedirect} from "../../hoc/withAuthRedirect";
+import {compose} from "redux";
 
 let UsersContainer = (props) => {
 
@@ -74,10 +76,21 @@ let mapStateToProps = (state) => {
 //     }
 // }
 
-export default connect(mapStateToProps,
-    {
-        setCurrentPage: setCurrentPage,
-        getUsers: getUsers,
-        follow: follow,
-        unFollow: unFollow
-    })(UsersContainer);
+// export default withAuthRedirect(connect(mapStateToProps,
+//     {
+//         setCurrentPage: setCurrentPage,
+//         getUsers: getUsers,
+//         follow: follow,
+//         unFollow: unFollow
+//     })(UsersContainer));
+
+export default compose(
+    withAuthRedirect,
+    connect(mapStateToProps,
+        {
+            setCurrentPage: setCurrentPage,
+            getUsers: getUsers,
+            follow: follow,
+            unFollow: unFollow
+        })
+)(UsersContainer);

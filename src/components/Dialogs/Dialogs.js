@@ -14,8 +14,6 @@ export default function Dialogs(props) {
         newMessageElem.current.value = '';
     };
 
-    if (props.isAuth === false) return <Redirect to={"/login"}/>;
-
     return (
         <div className={classes.dialogs}>
             <div className={classes.dialogs__list}>
