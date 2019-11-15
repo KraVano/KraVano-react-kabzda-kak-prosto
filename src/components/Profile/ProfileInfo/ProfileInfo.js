@@ -22,7 +22,7 @@ export default function ProfileInfo(props) {
                 />
                 <h2>{props.profile.fullName}</h2>
                 <h3>{props.profile.aboutMe}</h3>
-                <ProfileStatus status={"Hello my friends!"} />
+                <ProfileStatus status={props.status}/>
                 {/*{props.profile.contacts.map((c) => <h6>{c}</h6>)}*/}
                 <p>lookingForAJob: {props.profile.lookingForAJob ? 'Yes' : 'No'}</p>
                 <p>lookingForAJobDescription: {props.profile.lookingForAJobDescription}</p>
